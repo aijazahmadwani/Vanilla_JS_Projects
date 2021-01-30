@@ -46,7 +46,7 @@ let score = 0;
 loadQuiz();
 
 function loadQuiz() {
-    deselectAnswers(); 
+  deselectAnswers();
   const currentQuizData = quizData[currentQuiz];
   questionEl.innerHTML = currentQuizData.question;
   a_text.innerText = currentQuizData.a;
@@ -66,30 +66,25 @@ function getSelected() {
   return answer;
 }
 
-function deselectAnswers(){
-     answersEls.forEach((answerEl) => {
-       answerEl.checked = false;
-     });
-
-
+function deselectAnswers() {
+  answersEls.forEach((answerEl) => {
+    answerEl.checked = false;
+  });
 }
 
 submitBtn.addEventListener("click", () => {
   const answer = getSelected();
-  console.log(answer);
+
   if (answer) {
     if (answer === quizData[currentQuiz].correct) {
-      console.log("yes ");
       score++;
     }
-    if (answer) {
-      currentQuiz++;
-      if (currentQuiz < quizData.length) {
-        loadQuiz();
-      } else {
-        // show results
-        alert("Test is finished");
-      }
+    currentQuiz++;
+    if (currentQuiz < quizData.length) {
+      loadQuiz();
+    } else {
+      quiz.innerHTML = `<h2>You answered correctly at  ${score}/${quizData.length} questions.</h2> 
+        <button onClick="location.reload()">Reload</button>`;
     }
   }
 });
